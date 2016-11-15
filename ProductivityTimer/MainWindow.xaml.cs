@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Threading;
 
-namespace ProductivityTimer_WPF
+namespace ProductivityTimer
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
