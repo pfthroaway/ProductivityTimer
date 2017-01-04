@@ -5,18 +5,13 @@ using System.Windows.Threading;
 
 namespace ProductivityTimer
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : Window, INotifyPropertyChanged
+    /// <summary>Interaction logic for MainWindow.xaml</summary>
+    public partial class MainWindow : INotifyPropertyChanged
     {
-        private TimeSpan _totalWorkTime = new TimeSpan();
-        private TimeSpan _totalBreakTime = new TimeSpan();
-        private TimeSpan _currentWorkTime = new TimeSpan();
-        private TimeSpan _currentBreakTime = new TimeSpan();
-        private TimeSpan oneSecond = DateTime.MinValue.AddSeconds(1) - DateTime.MinValue;
-        private DispatcherTimer timerBreak = new DispatcherTimer();
-        private DispatcherTimer timerWork = new DispatcherTimer();
+        private TimeSpan _totalWorkTime, _totalBreakTime, _currentWorkTime, _currentBreakTime;
+        private readonly TimeSpan _oneSecond = DateTime.MinValue.AddSeconds(1) - DateTime.MinValue;
+        private readonly DispatcherTimer _timerBreak = new DispatcherTimer();
+        private readonly DispatcherTimer _timerWork = new DispatcherTimer();
 
         #region Data-Binding
 
@@ -31,49 +26,45 @@ namespace ProductivityTimer
 
         #region Properties
 
+        /// <summary>The amount of time worked during this current work session.</summary>
         public TimeSpan CurrentWorkTime
         {
             get { return _currentWorkTime; }
             set { _currentWorkTime = value; OnPropertyChanged("CurrentWorkTimeToString"); }
         }
 
-        public string CurrentWorkTimeToString
-        {
-            get { return CurrentWorkTime.ToString(@"hh\:mm\:ss"); }
-        }
+        /// <summary>The amount of time worked during this current work session, formatted.</summary>
+        public string CurrentWorkTimeToString => CurrentWorkTime.ToString(@"hh\:mm\:ss");
 
+        /// <summary>The amount of time breaked during this current break session.</summary>
         public TimeSpan CurrentBreakTime
         {
             get { return _currentBreakTime; }
             set { _currentBreakTime = value; OnPropertyChanged("CurrentBreakTimeToString"); }
         }
 
-        public string CurrentBreakTimeToString
-        {
-            get { return CurrentBreakTime.ToString(@"hh\:mm\:ss"); }
-        }
+        /// <summary>The amount of time breaked during this current break session, formatted.</summary>
+        public string CurrentBreakTimeToString => CurrentBreakTime.ToString(@"hh\:mm\:ss");
 
+        /// <summary>The total amount of time worked during this session.</summary>
         public TimeSpan TotalWorkTime
         {
             get { return _totalWorkTime; }
             set { _totalWorkTime = value; OnPropertyChanged("TotalWorkTimeToString"); }
         }
 
-        public string TotalWorkTimeToString
-        {
-            get { return TotalWorkTime.ToString(@"hh\:mm\:ss"); }
-        }
+        /// <summary>The total amount of time worked during this session, formatted.</summary>
+        public string TotalWorkTimeToString => TotalWorkTime.ToString(@"hh\:mm\:ss");
 
+        /// <summary>The total amount of breaked worked during this session.</summary>
         public TimeSpan TotalBreakTime
         {
             get { return _totalBreakTime; }
             set { _totalBreakTime = value; OnPropertyChanged("TotalBreakTimeToString"); }
         }
 
-        public string TotalBreakTimeToString
-        {
-            get { return TotalBreakTime.ToString(@"hh\:mm\:ss"); }
-        }
+        /// <summary>The total amount of breaked worked during this session, formatted.</summary>
+        public string TotalBreakTimeToString => TotalBreakTime.ToString(@"hh\:mm\:ss");
 
         #endregion Properties
 
@@ -82,8 +73,8 @@ namespace ProductivityTimer
         private void btnStartWork_Click(object sender, RoutedEventArgs e)
         {
             CurrentWorkTime = new TimeSpan();
-            timerBreak.Stop();
-            timerWork.Start();
+            _timerBreak.Stop();
+            _timerWork.Start();
             btnStartBreak.IsEnabled = true;
             btnStartWork.IsEnabled = false;
             btnStopWork.IsEnabled = true;
@@ -92,8 +83,8 @@ namespace ProductivityTimer
         private void btnStartBreak_Click(object sender, RoutedEventArgs e)
         {
             CurrentBreakTime = new TimeSpan();
-            timerWork.Stop();
-            timerBreak.Start();
+            _timerWork.Stop();
+            _timerBreak.Start();
             btnStopWork.IsEnabled = true;
             btnStartBreak.IsEnabled = false;
             btnStartWork.IsEnabled = true;
@@ -101,8 +92,8 @@ namespace ProductivityTimer
 
         private void btnStopWork_Click(object sender, RoutedEventArgs e)
         {
-            timerWork.Stop();
-            timerBreak.Stop();
+            _timerWork.Stop();
+            _timerBreak.Stop();
             btnStartBreak.IsEnabled = false;
             btnStartWork.IsEnabled = true;
             btnStopWork.IsEnabled = false;
@@ -114,14 +105,14 @@ namespace ProductivityTimer
 
         private void timerBreak_Tick(object sender, EventArgs e)
         {
-            CurrentBreakTime += oneSecond;
-            TotalBreakTime += oneSecond;
+            CurrentBreakTime += _oneSecond;
+            TotalBreakTime += _oneSecond;
         }
 
         private void timerWork_Tick(object sender, EventArgs e)
         {
-            CurrentWorkTime += oneSecond;
-            TotalWorkTime += oneSecond;
+            CurrentWorkTime += _oneSecond;
+            TotalWorkTime += _oneSecond;
         }
 
         #endregion Timer Ticks
@@ -130,10 +121,10 @@ namespace ProductivityTimer
         {
             InitializeComponent();
             DataContext = this;
-            timerBreak.Tick += timerBreak_Tick;
-            timerBreak.Interval = new TimeSpan(0, 0, 1);
-            timerWork.Tick += timerWork_Tick;
-            timerWork.Interval = new TimeSpan(0, 0, 1);
+            _timerBreak.Tick += timerBreak_Tick;
+            _timerBreak.Interval = new TimeSpan(0, 0, 1);
+            _timerWork.Tick += timerWork_Tick;
+            _timerWork.Interval = new TimeSpan(0, 0, 1);
         }
     }
 }

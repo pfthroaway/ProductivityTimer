@@ -3,9 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ProductivityTimer"
         mc:Ignorable="d"
-    <Grid>
+        Title="Productivity Timer" ResizeMode="NoResize" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen" FontFamily="Segoe UI Semibold" FontSize="24" Icon="Hourglass.ico">
+    <Grid Margin="10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="Auto" />
@@ -19,38 +19,38 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Border Grid.Column="0" Grid.Row="0" Margin="10,10,0,0" BorderThickness="1,1,0,0" BorderBrush="Black">
+        <Border Grid.Column="0" Grid.Row="0" BorderThickness="1,1,0,0" BorderBrush="Black">
             <TextBlock TextAlignment="Center" Margin="5" Text="Work" />
         </Border>
-        <Border Grid.Column="1" Grid.Row="0" Margin="0,10,10,0" BorderThickness="1,1,1,0" BorderBrush="Black">
+        <Border Grid.Column="1" Grid.Row="0" BorderThickness="1,1,1,0" BorderBrush="Black">
             <TextBlock TextAlignment="Center" Margin="5" Text="Break" />
         </Border>
-        <Border Grid.Column="0" Grid.Row="1" Margin="10,0,0,0" BorderThickness="1,1,0,0" BorderBrush="Black">
+        <Border Grid.Column="0" Grid.Row="1" BorderThickness="1,1,0,0" BorderBrush="Black">
             <TextBlock TextAlignment="Center" Margin="5" Text="Total:" />
         </Border>
-        <Border Grid.Column="1" Grid.Row="1" Margin="0,0,10,0" BorderThickness="1,1,1,0" BorderBrush="Black">
+        <Border Grid.Column="1" Grid.Row="1" BorderThickness="1,1,1,0" BorderBrush="Black">
             <TextBlock TextAlignment="Center" Margin="5" Text="Total:" />
         </Border>
-        <Border Grid.Column="0" Grid.Row="2" Margin="10,0,0,0" BorderThickness="1,1,0,0" BorderBrush="Black">
+        <Border Grid.Column="0" Grid.Row="2" BorderThickness="1,1,0,0" BorderBrush="Black">
             <TextBlock x:Name="lblTotalWorkTime" TextAlignment="Center" Margin="5" Text="{Binding Path=TotalWorkTimeToString, Mode=OneWay}" />
         </Border>
-        <Border Grid.Column="1" Grid.Row="2" Margin="0,0,10,0" BorderThickness="1,1,1,0" BorderBrush="Black">
+        <Border Grid.Column="1" Grid.Row="2" BorderThickness="1,1,1,0" BorderBrush="Black">
             <TextBlock x:Name="lblTotalBreakTime" TextAlignment="Center" Margin="5" Text="{Binding Path=TotalBreakTimeToString, Mode=OneWay}" />
         </Border>
-        <Border Grid.Column="0" Grid.Row="3" Margin="10,0,0,0" BorderThickness="1,1,0,0" BorderBrush="Black">
+        <Border Grid.Column="0" Grid.Row="3" BorderThickness="1,1,0,0" BorderBrush="Black">
             <TextBlock TextAlignment="Center" Margin="5" Text="Current:" />
         </Border>
-        <Border Grid.Column="1" Grid.Row="3" Margin="0,0,10,0" BorderThickness="1,1,1,0" BorderBrush="Black">
+        <Border Grid.Column="1" Grid.Row="3" BorderThickness="1,1,1,0" BorderBrush="Black">
             <TextBlock TextAlignment="Center" Margin="5" Text="Current:" />
         </Border>
-        <Border Grid.Column="0" Grid.Row="4" Margin="10,0,0,10" BorderThickness="1,1,0,1" BorderBrush="Black">
+        <Border Grid.Column="0" Grid.Row="4" BorderThickness="1,1,0,1" BorderBrush="Black">
             <TextBlock x:Name="lblCurrentWorkTime" TextAlignment="Center" Margin="5" Text="{Binding Path=CurrentWorkTimeToString, Mode=OneWay}" />
         </Border>
-        <Border Grid.Column="1" Grid.Row="4" Margin="0,0,10,10" BorderThickness="1" BorderBrush="Black">
+        <Border Grid.Column="1" Grid.Row="4" BorderThickness="1" BorderBrush="Black">
             <TextBlock x:Name="lblCurrentBreakTime" TextAlignment="Center" Margin="5" Text="{Binding Path=CurrentBreakTimeToString, Mode=OneWay}" />
         </Border>
-        <Button x:Name="btnStartWork" Grid.Column="0" Grid.Row="5" Width="150" Height="40" Margin="10" Content="_Start" Click="btnStartWork_Click" />
-        <Button x:Name="btnStartBreak" Grid.Column="1" Grid.Row="5" Width="150" Height="40" Margin="10" Content="_Break" IsEnabled="False" Click="btnStartBreak_Click" />
-        <Button x:Name="btnStopWork" Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="2" Width="150" Height="40" Margin="10" Content="S_top" IsEnabled="False" Click="btnStopWork_Click" />
+        <Button x:Name="btnStartWork" Grid.Column="0" Grid.Row="5" Width="150" Height="40" Margin="0,10,5,10" Content="_Start" Click="btnStartWork_Click" />
+        <Button x:Name="btnStartBreak" Grid.Column="1" Grid.Row="5" Width="150" Height="40" Margin="5,10,0,10" Content="_Break" IsEnabled="False" Click="btnStartBreak_Click" />
+        <Button x:Name="btnStopWork" Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="2" Width="150" Height="40" Content="S_top" IsEnabled="False" Click="btnStopWork_Click" />
     </Grid>
 </Window>
